@@ -27,7 +27,7 @@ export default function Features() {
                     Pushing the Boundaries of Formula 1 Technology
                 </motion.p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {carData.features.map((feature, index) => (
                         <motion.div
                             key={index}
@@ -58,7 +58,7 @@ export default function Features() {
                                 </h3>
 
                                 {/* Description - Grows to fill space */}
-                                <p className="font-[family-name:var(--font-rajdhani)] text-lg leading-relaxed text-gray-300 flex-grow">
+                                <p className="font-[family-name:var(--font-rajdhani)] text-lg leading-relaxed text-gray-300 flex-grow pb-2">
                                     {feature.description}
                                 </p>
 

@@ -58,7 +58,7 @@ export default function SpecsGrid() {
                                 </div>
 
                                 {/* Value */}
-                                <div className="font-[family-name:var(--font-rajdhani)] text-2xl font-bold text-white leading-tight">
+                                <div className="font-[family-name:var(--font-rajdhani)] text-2xl font-bold text-white leading-tight pb-4">
                                     {spec.value}
                                 </div>
 
