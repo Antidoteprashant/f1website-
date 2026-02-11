@@ -16,10 +16,7 @@ const nextConfig: NextConfig = {
   // React strict mode
   reactStrictMode: true,
 
-  // Production optimizations
-  swcMinify: true,
-
-  // Compiler optimizations
+  // Compiler optimizations (remove console.log in production)
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
