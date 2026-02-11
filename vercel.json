@@ -1,8 +1,0 @@
-{
-    "$schema": "https://openapi.vercel.sh/vercel.json",
-    "buildCommand": "cd rb19-showcase && npm run build",
-    "devCommand": "cd rb19-showcase && npm run dev",
-    "installCommand": "cd rb19-showcase && npm install",
-    "framework": "nextjs",
-    "outputDirectory": "rb19-showcase/.next"
-}
