@@ -61,7 +61,7 @@ export default function F1CarViewer() {
                     <directionalLight position={[-5, 3, -5]} intensity={0.5} />
 
                     {/* Rim Light (Back) for edge highlights */}
-                    <directionalLight position={[0, 2, -8]} intensity={0.8} color="#00BFFF" />
+                    <directionalLight position={[0, 2, -8]} intensity={0.8} color="#ef4444" />
 
                     {/* Environment Lighting */}
                     <Environment preset="studio" />

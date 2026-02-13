@@ -3,70 +3,140 @@
 import { motion } from "framer-motion";
 import { carData } from "@/data/carData";
 
+// Inline SVG Icons for better performance and customization
+const Icons = {
+    Aerodynamics: (props: React.SVGProps<SVGSVGElement>) => (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+            <path d="M2 12h20" />
+            <path d="M19 12v-5c0-1.8-1.5-3.3-3.3-3.3H5" />
+            <path d="M5 3.7c-1.8 0-3 1.5-3 3.3V12" />
+            <path d="M16.5 12c.8 0 1.5.7 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 16.5v-3C6 12.7 6.7 12 7.5 12" />
+            <path d="M22 14h-2" />
+        </svg>
+    ),
+    Hybrid: (props: React.SVGProps<SVGSVGElement>) => (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+    ),
+    Cooling: (props: React.SVGProps<SVGSVGElement>) => (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+            <path d="M12 2v20" />
+            <path d="M4.93 4.93l14.14 14.14" />
+            <path d="M19.07 4.93L4.93 19.07" />
+        </svg>
+    ),
+    Championship: (props: React.SVGProps<SVGSVGElement>) => (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+            <path d="M4 22h16" />
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </svg>
+    ),
+};
+
+const featureIcons = [
+    Icons.Aerodynamics,
+    Icons.Hybrid,
+    Icons.Cooling,
+    Icons.Championship,
+];
+
 export default function Features() {
     return (
-        <section className="py-20 px-6 bg-gradient-to-b from-[var(--color-carbon-gray)] to-[var(--color-pagani-black)]">
-            <div className="max-w-7xl mx-auto">
-                <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
+        <section className="py-20 md:py-32 px-4 md:px-6 lg:px-8 bg-[var(--color-pagani-black)] relative overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl font-bold uppercase tracking-wider text-center text-gradient-gold mb-4"
+                    className="text-center mb-12 md:mb-20"
                 >
-                    Engineering Excellence
-                </motion.h2>
+                    <h2 className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wider text-white mb-5 md:mb-6 leading-tight">
+                        Engineering Excellence
+                    </h2>
+                    <p className="font-[family-name:var(--font-rajdhani)] text-base md:text-lg text-red-200/60 tracking-[0.2em] uppercase">
+                        Performance Through Innovation
+                    </p>
+                </motion.div>
 
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-center text-gray-400 mb-16 font-[family-name:var(--font-rajdhani)] tracking-wide"
-                >
-                    Pushing the Boundaries of Formula 1 Technology
-                </motion.p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 lg:gap-8">
+                    {carData.features.map((feature, index) => {
+                        const Icon = featureIcons[index] || Icons.Aerodynamics;
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                whileHover={{ y: -5 }}
+                                className="group relative"
+                            >
+                                {/* Card Container */}
+                                <div className="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 md:p-8 transition-all duration-300 group-hover:border-red-500/50 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] group-hover:bg-white/10 flex flex-col">
+                                    {/* Neon Corner Accent */}
+                                    <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none overflow-hidden rounded-tr-xl">
+                                        <div className="absolute top-0 right-0 w-full h-full border-t-2 border-r-2 border-transparent group-hover:border-red-400 transition-colors duration-300" />
+                                    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {carData.features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.15 }}
-                            whileHover={{ y: -8, scale: 1.01 }}
-                            className="group relative h-full"
-                        >
-                            {/* Glow Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-pagani-gold)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg blur-xl" />
+                                    {/* Icon */}
+                                    <div className="mb-5 md:mb-6 inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-lg bg-red-950/30 text-red-400 group-hover:text-red-300 group-hover:scale-110 transition-all duration-300">
+                                        <Icon className="w-7 h-7 md:w-8 md:h-8" />
+                                    </div>
 
-                            {/* Card Container - Full Height */}
-                            <div className="relative h-full bg-gradient-to-br from-[var(--color-carbon-gray)] to-[#1f1f1f] border border-[var(--color-pagani-gold)]/20 rounded-lg p-8 overflow-hidden transition-all duration-500 group-hover:border-[var(--color-pagani-gold)]/60 group-hover:shadow-2xl group-hover:shadow-[var(--color-pagani-gold)]/20 flex flex-col">
+                                    {/* Title */}
+                                    <h3 className="font-[family-name:var(--font-orbitron)] text-lg md:text-xl font-bold text-white mb-3 md:mb-4 group-hover:text-red-200 transition-colors leading-tight">
+                                        {feature.title}
+                                    </h3>
 
-                                {/* Top Accent Line */}
-                                <div className="absolute top-0 left-0 h-1 w-0 bg-gradient-to-r from-transparent via-[var(--color-pagani-gold)] to-transparent group-hover:w-full transition-all duration-700" />
-
-                                {/* Icon */}
-                                <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-500">
-                                    {feature.icon}
+                                    {/* Description */}
+                                    <p className="font-[family-name:var(--font-rajdhani)] text-sm md:text-base text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors flex-grow">
+                                        {feature.description}
+                                    </p>
                                 </div>
-
-                                {/* Title */}
-                                <h3 className="font-[family-name:var(--font-orbitron)] text-2xl font-bold uppercase tracking-wide text-[var(--color-pagani-gold)] mb-4 group-hover:text-[var(--color-bright-gold)] transition-colors duration-300">
-                                    {feature.title}
-                                </h3>
-
-                                {/* Description - Grows to fill space */}
-                                <p className="font-[family-name:var(--font-rajdhani)] text-lg leading-relaxed text-gray-300 flex-grow pb-2">
-                                    {feature.description}
-                                </p>
-
-                                {/* Bottom corner accent */}
-                                <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[var(--color-pagani-gold)]/20 group-hover:border-[var(--color-pagani-gold)]/50 transition-colors duration-500" />
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

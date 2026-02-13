@@ -4,8 +4,8 @@
 @theme {
   /* Color Tokens */
   --color-pagani-black: #1a1a1a;
-  --color-pagani-gold: #00BFFF;
-  --color-bright-gold: #87CEEB;
+  --color-pagani-gold: #ef4444;
+  --color-bright-gold: #f87171;
   --color-carbon-gray: #2a2a2a;
 
   /* Font Families */
@@ -32,8 +32,8 @@ body {
 }
 
 *::selection {
-  background-color: rgba(0, 191, 255, 0.3);
-  color: #87CEEB;
+  background-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
 }
 
 /* Custom Utility Classes */
@@ -52,14 +52,14 @@ body {
 }
 
 .hud-border {
-  border: 1px solid rgba(0, 191, 255, 0.3);
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
   transition: all 0.3s ease;
 }
 
 .hud-border:hover {
-  border-color: #00BFFF;
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+  border-color: #ef4444;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
 }
 
 /* Smooth Scrollbar */

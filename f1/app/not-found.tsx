@@ -16,7 +16,7 @@ export default function NotFound() {
                 href="/"
                 style={{
                     marginTop: '2rem',
-                    color: '#00BFFF',
+                    color: '#ef4444',
                     textDecoration: 'none',
                     fontSize: '1.2rem'
                 }}

@@ -22,7 +22,7 @@ export default function F1CarModel({ rotation = [0, 0, 0], wireframe = false }: 
 
     // Yellow accent material (Red Bull Racing yellow)
     const wingMaterial = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#00BFFF"),
+        color: new THREE.Color("#ef4444"),
         metalness: 0.9,
         roughness: 0.2,
         wireframe,
