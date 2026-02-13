@@ -5,8 +5,8 @@ import { carData } from "@/data/carData";
 
 export default function SpecsGrid() {
     return (
-        <section className="py-20 px-6 bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)]">
-            <div className="max-w-7xl mx-auto">
+        <section className="py-20 bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)]">
+            <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ export default function SpecsGrid() {
                     Championship-Winning Engineering Excellence
                 </motion.p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {carData.specifications.map((spec, index) => (
                         <motion.div
                             key={index}

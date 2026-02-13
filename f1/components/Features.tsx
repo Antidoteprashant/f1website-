@@ -79,11 +79,11 @@ const featureIcons = [
 
 export default function Features() {
     return (
-        <section className="py-20 md:py-32 px-4 md:px-6 lg:px-8 bg-[var(--color-pagani-black)] relative overflow-hidden">
+        <section className="py-24 md:py-36 bg-[var(--color-pagani-black)] relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-[1600px] mx-auto px-6 md:px-12 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export default function Features() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {carData.features.map((feature, index) => {
                         const Icon = featureIcons[index] || Icons.Aerodynamics;
                         return (
@@ -113,7 +113,7 @@ export default function Features() {
                                 className="group relative"
                             >
                                 {/* Card Container */}
-                                <div className="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 md:p-8 transition-all duration-300 group-hover:border-red-500/50 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] group-hover:bg-white/10 flex flex-col">
+                                <div className="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-8 transition-all duration-300 group-hover:border-red-500/50 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] group-hover:bg-white/10 flex flex-col">
                                     {/* Neon Corner Accent */}
                                     <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none overflow-hidden rounded-tr-xl">
                                         <div className="absolute top-0 right-0 w-full h-full border-t-2 border-r-2 border-transparent group-hover:border-red-400 transition-colors duration-300" />
