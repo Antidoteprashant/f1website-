@@ -5,7 +5,7 @@ import { carData } from "@/data/carData";
 
 export default function SpecsGrid() {
     return (
-        <section className="py-20 bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)]">
+        <section className="bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)]" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
             <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
@@ -27,7 +27,7 @@ export default function SpecsGrid() {
                     Championship-Winning Engineering Excellence
                 </motion.p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {carData.specifications.map((spec, index) => (
                         <motion.div
                             key={index}
@@ -42,7 +42,7 @@ export default function SpecsGrid() {
                             <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-pagani-gold)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg blur-xl" />
 
                             {/* Card Container */}
-                            <div className="relative bg-gradient-to-br from-[var(--color-carbon-gray)] to-[#1f1f1f] border border-[var(--color-pagani-gold)]/20 rounded-lg p-8 overflow-hidden transition-all duration-500 group-hover:border-[var(--color-pagani-gold)]/60 group-hover:shadow-2xl group-hover:shadow-[var(--color-pagani-gold)]/20">
+                            <div className="relative bg-gradient-to-br from-[var(--color-carbon-gray)] to-[#1f1f1f] border border-[var(--color-pagani-gold)]/20 rounded-lg overflow-hidden transition-all duration-500 group-hover:border-[var(--color-pagani-gold)]/60 group-hover:shadow-2xl group-hover:shadow-[var(--color-pagani-gold)]/20" style={{ padding: '2.5rem' }}>
 
                                 {/* Top Accent Line */}
                                 <div className="absolute top-0 left-0 h-1 w-0 bg-gradient-to-r from-transparent via-[var(--color-pagani-gold)] to-transparent group-hover:w-full transition-all duration-700" />
@@ -53,12 +53,12 @@ export default function SpecsGrid() {
                                 </div>
 
                                 {/* Label */}
-                                <div className="font-[family-name:var(--font-rajdhani)] text-xs uppercase tracking-[0.2em] text-[var(--color-pagani-gold)]/70 mb-3 group-hover:text-[var(--color-pagani-gold)] transition-colors duration-300">
+                                <div className="font-[family-name:var(--font-rajdhani)] text-xs uppercase tracking-[0.2em] text-[var(--color-pagani-gold)]/70 mb-4 group-hover:text-[var(--color-pagani-gold)] transition-colors duration-300">
                                     {spec.label}
                                 </div>
 
                                 {/* Value */}
-                                <div className="font-[family-name:var(--font-rajdhani)] text-2xl font-bold text-white leading-tight pb-4">
+                                <div className="font-[family-name:var(--font-rajdhani)] text-2xl md:text-3xl font-bold text-white leading-tight pb-2">
                                     {spec.value}
                                 </div>
 

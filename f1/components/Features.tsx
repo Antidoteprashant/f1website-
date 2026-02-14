@@ -79,7 +79,7 @@ const featureIcons = [
 
 export default function Features() {
     return (
-        <section className="py-24 md:py-36 bg-[var(--color-pagani-black)] relative overflow-hidden">
+        <section className="pt-16 md:pt-24 bg-[var(--color-pagani-black)] relative overflow-hidden" style={{ paddingBottom: '0rem' }}>
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -91,7 +91,7 @@ export default function Features() {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-12 md:mb-20"
                 >
-                    <h2 className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wider text-white mb-5 md:mb-6 leading-tight">
+                    <h2 className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wider text-white mb-6 md:mb-8 leading-tight">
                         Engineering Excellence
                     </h2>
                     <p className="font-[family-name:var(--font-rajdhani)] text-base md:text-lg text-red-200/60 tracking-[0.2em] uppercase">
@@ -99,7 +99,7 @@ export default function Features() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {carData.features.map((feature, index) => {
                         const Icon = featureIcons[index] || Icons.Aerodynamics;
                         return (
@@ -113,7 +113,7 @@ export default function Features() {
                                 className="group relative"
                             >
                                 {/* Card Container */}
-                                <div className="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-8 transition-all duration-300 group-hover:border-red-500/50 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] group-hover:bg-white/10 flex flex-col">
+                                <div className="h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl transition-all duration-300 group-hover:border-red-500/50 group-hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] group-hover:bg-white/10 flex flex-col" style={{ padding: '2.5rem' }}>
                                     {/* Neon Corner Accent */}
                                     <div className="absolute top-0 right-0 w-8 h-8 pointer-events-none overflow-hidden rounded-tr-xl">
                                         <div className="absolute top-0 right-0 w-full h-full border-t-2 border-r-2 border-transparent group-hover:border-red-400 transition-colors duration-300" />
@@ -125,12 +125,12 @@ export default function Features() {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 className="font-[family-name:var(--font-orbitron)] text-lg md:text-xl font-bold text-white mb-3 md:mb-4 group-hover:text-red-200 transition-colors leading-tight">
+                                    <h3 className="font-[family-name:var(--font-orbitron)] text-lg md:text-xl font-bold text-white group-hover:text-red-200 transition-colors leading-tight" style={{ marginBottom: '1.25rem' }}>
                                         {feature.title}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="font-[family-name:var(--font-rajdhani)] text-sm md:text-base text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors flex-grow">
+                                    <p className="font-[family-name:var(--font-rajdhani)] text-sm md:text-base text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors flex-grow" style={{ lineHeight: '1.7' }}>
                                         {feature.description}
                                     </p>
                                 </div>

@@ -18,7 +18,7 @@ export default function F1CarViewer() {
     };
 
     return (
-        <section className="relative py-20 bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)] overflow-hidden">
+        <section className="relative bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)] overflow-hidden" style={{ paddingTop: '7rem', paddingBottom: '7rem' }}>
             {/* Section Title */}
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -27,10 +27,10 @@ export default function F1CarViewer() {
                 transition={{ duration: 0.8 }}
                 className="text-center mb-12 relative z-10"
             >
-                <h2 className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl font-bold uppercase tracking-widest text-gradient-gold">
+                <h2 className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-widest text-gradient-gold leading-tight">
                     RB19 — 3D Engineering View
                 </h2>
-                <p className="font-[family-name:var(--font-rajdhani)] text-base md:text-lg text-gray-400 mt-4 uppercase tracking-wide">
+                <p className="font-[family-name:var(--font-rajdhani)] text-base md:text-lg text-gray-400 mt-6 uppercase tracking-wide">
                     Interactive Car Model • Drag to Rotate • Scroll to Zoom
                 </p>
             </motion.div>
