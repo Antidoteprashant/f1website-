@@ -5,13 +5,21 @@ import { useEffect, useState } from 'react';
 
 export default function Footer() {
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [isDesktop, setIsDesktop] = useState(true);
 
     useEffect(() => {
+        const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
+        checkDesktop(); // Check initially
+        window.addEventListener('resize', checkDesktop);
+
         const timer = setInterval(() => {
             setCurrentTime(new Date());
         }, 1000);
 
-        return () => clearInterval(timer);
+        return () => {
+            clearInterval(timer);
+            window.removeEventListener('resize', checkDesktop);
+        };
     }, []);
 
     const links = [
@@ -137,7 +145,7 @@ export default function Footer() {
                                             className="absolute top-1/2 left-1/2 w-0.5 h-3 bg-white/30"
                                             style={{
                                                 transformOrigin: 'center',
-                                                transform: `translate(-50%, -50%) rotate(${i * 30}deg) translateY(-${28 * (window.innerWidth >= 768 ? 1.2 : 1)}rem)`,
+                                                transform: `translate(-50%, -50%) rotate(${i * 30}deg) translateY(-${28 * (isDesktop ? 1.2 : 1)}rem)`,
                                             }}
                                         />
                                     ))}

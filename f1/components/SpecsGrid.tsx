@@ -5,14 +5,14 @@ import { carData } from "@/data/carData";
 
 export default function SpecsGrid() {
     return (
-        <section className="bg-gradient-to-b from-[var(--color-pagani-black)] to-[var(--color-carbon-gray)]" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
+        <section className="bg-gradient-to-b from-[#3E2723] to-[#120a05]" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
             <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl font-bold uppercase tracking-wider text-center text-gradient-gold mb-4"
+                    className="font-[family-name:var(--font-orbitron)] text-3xl md:text-5xl font-bold uppercase tracking-wider text-center text-white mb-4"
                 >
                     Technical Specifications
                 </motion.h2>
