@@ -27,9 +27,9 @@ export default function ZondaScrollCanvas({
 
         for (let i = 1; i <= totalFrames; i++) {
             const img = new Image();
-            // Format: ezgif-frame-001.jpg to ezgif-frame-181.jpg
+            // Format: ezgif-frame-001.png to ezgif-frame-181.png
             const frameNumber = i.toString().padStart(3, "0");
-            img.src = `${imageFolderPath}/ezgif-frame-${frameNumber}.jpg`;
+            img.src = `${imageFolderPath}/ezgif-frame-${frameNumber}.png`;
             images.push(img);
         }
 

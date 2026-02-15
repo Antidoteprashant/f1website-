@@ -41,7 +41,7 @@ export default function Home() {
     };
   }, []);
 
-  const TOTAL_FRAMES = 181; // ezgif-frame-001.jpg to ezgif-frame-181.jpg
+  const TOTAL_FRAMES = 181; // ezgif-frame-001.png to ezgif-frame-181.png
   const IMAGE_FOLDER_PATH = "/images/rb19-f1-sequence";
 
   return (
