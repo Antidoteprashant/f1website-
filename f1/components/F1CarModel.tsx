@@ -12,35 +12,74 @@ interface F1CarModelProps {
 export default function F1CarModel({ rotation = [0, 0, 0], wireframe = false }: F1CarModelProps) {
     const carRef = useRef<THREE.Group>(null);
 
-    // Carbon fiber material
+    // --- Materials ---
+
+    // Carbon fiber: dark, slightly metallic, distinct roughness
     const carbonMaterial = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#0a0a0a"),
-        metalness: 0.4,
+        color: new THREE.Color("#111111"),
+        metalness: 0.6,
+        roughness: 0.4,
+        wireframe,
+    });
+
+    // Matte Blue (Dark Navy) for the main body - Red Bull style
+    const bodyBlueMaterial = new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#060a18"), // Very dark blue
+        metalness: 0.3,
+        roughness: 0.6,
+        wireframe,
+    });
+
+    // Yellow accent (Nose, Airbox)
+    const yellowMaterial = new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#fcd303"),
+        metalness: 0.2,
+        roughness: 0.3,
+        emissive: new THREE.Color("#fcd303"),
+        emissiveIntensity: 0.1,
+        wireframe,
+    });
+
+    // Red accent (Bull details)
+    const redMaterial = new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#ff0022"),
+        metalness: 0.2,
         roughness: 0.3,
         wireframe,
     });
 
-    // Yellow accent material (Red Bull Racing yellow)
-    const wingMaterial = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#ef4444"),
-        metalness: 0.9,
-        roughness: 0.2,
-        wireframe,
-    });
-
-    // Metallic material (wheels, halo)
+    // Metallic (Rims, Halo structure)
     const metallicMaterial = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#888888"),
-        metalness: 1.0,
-        roughness: 0.2,
+        color: new THREE.Color("#aaaaaa"),
+        metalness: 0.9,
+        roughness: 0.1,
         wireframe,
     });
 
-    // Rubber material for tires
+    // Rubber (Tires) - Dark grey, rough
     const rubberMaterial = new THREE.MeshStandardMaterial({
         color: new THREE.Color("#1a1a1a"),
         metalness: 0.1,
         roughness: 0.9,
+        wireframe,
+    });
+
+    // Mirror / Glass
+    const glassMaterial = new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#000000"),
+        metalness: 1.0,
+        roughness: 0.0,
+        transparent: true,
+        opacity: 0.8,
+        wireframe,
+    });
+
+    // Brake Light (Emissive)
+    const brakeLightMaterial = new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#ff0000"),
+        emissive: new THREE.Color("#ff0000"),
+        emissiveIntensity: 2.0,
+        toneMapped: false,
         wireframe,
     });
 
@@ -52,129 +91,155 @@ export default function F1CarModel({ rotation = [0, 0, 0], wireframe = false }: 
 
     return (
         <group ref={carRef} position={[0, 0.3, 0]}>
-            {/* Main Chassis */}
-            <mesh position={[0, 0.15, 0]} material={carbonMaterial}>
-                <boxGeometry args={[0.8, 0.25, 3.5]} />
+            {/* --- Main Body --- */}
+
+            {/* Central Monocoque */}
+            <mesh position={[0, 0.2, 0.2]} material={bodyBlueMaterial}>
+                <boxGeometry args={[0.5, 0.25, 2.5]} />
             </mesh>
 
-            {/* Cockpit */}
-            <mesh position={[0, 0.35, -0.3]} material={carbonMaterial}>
-                <boxGeometry args={[0.6, 0.15, 1.2]} />
+            {/* Nose Cone - Tapered */}
+            <mesh position={[0, 0.15, -1.6]} rotation={[Math.PI / 2, 0, 0]} material={bodyBlueMaterial}>
+                <cylinderGeometry args={[0.08, 0.25, 1.4, 16]} />
+            </mesh>
+            {/* Nose Tip - Yellow */}
+            <mesh position={[0, 0.15, -2.35]} rotation={[Math.PI / 2, 0, 0]} material={yellowMaterial}>
+                <cylinderGeometry args={[0.02, 0.08, 0.1, 16]} />
             </mesh>
 
-            {/* Halo Device */}
-            <mesh position={[0, 0.5, -0.3]} material={metallicMaterial}>
-                <torusGeometry args={[0.35, 0.025, 16, 32, Math.PI]} />
+            {/* Sidepods - Detailed */}
+            {/* Left Sidepod */}
+            <group position={[-0.45, 0.15, 0.5]}>
+                <mesh material={bodyBlueMaterial} position={[0, 0, 0]}>
+                    <boxGeometry args={[0.4, 0.25, 1.8]} />
+                </mesh>
+                {/* Intake slope */}
+                <mesh position={[0, 0.05, -0.95]} rotation={[Math.PI / 4, 0, 0]} material={carbonMaterial}>
+                    <boxGeometry args={[0.38, 0.1, 0.2]} />
+                </mesh>
+            </group>
+            {/* Right Sidepod */}
+            <group position={[0.45, 0.15, 0.5]}>
+                <mesh material={bodyBlueMaterial} position={[0, 0, 0]}>
+                    <boxGeometry args={[0.4, 0.25, 1.8]} />
+                </mesh>
+                {/* Intake slope */}
+                <mesh position={[0, 0.05, -0.95]} rotation={[Math.PI / 4, 0, 0]} material={carbonMaterial}>
+                    <boxGeometry args={[0.38, 0.1, 0.2]} />
+                </mesh>
+            </group>
+
+            {/* Engine Cover & Shark Fin */}
+            <mesh position={[0, 0.35, 0.8]} material={bodyBlueMaterial}>
+                <boxGeometry args={[0.3, 0.25, 1.5]} />
+            </mesh>
+            <mesh position={[0, 0.55, 1.0]} material={bodyBlueMaterial}>
+                <boxGeometry args={[0.05, 0.3, 1.2]} />
+            </mesh>
+            {/* Airbox (Yellow Top) */}
+            <mesh position={[0, 0.5, 0.1]} material={yellowMaterial}>
+                <boxGeometry args={[0.2, 0.15, 0.3]} />
             </mesh>
 
-            {/* Engine Cover with Shark Fin */}
-            <mesh position={[0, 0.3, 1]} material={carbonMaterial}>
-                <boxGeometry args={[0.7, 0.2, 1.5]} />
+
+            {/* Cockpit Area */}
+            <mesh position={[0, 0.3, -0.4]} material={carbonMaterial}>
+                <boxGeometry args={[0.35, 0.2, 0.8]} />
+            </mesh>
+            {/* Halo - Thick Loop */}
+            <mesh position={[0, 0.45, -0.5]} rotation={[0.2, 0, 0]} material={carbonMaterial}>
+                <torusGeometry args={[0.25, 0.03, 8, 16, Math.PI]} />
+            </mesh>
+            <mesh position={[0, 0.45, -0.5]} rotation={[0, 0, 0]} material={carbonMaterial}>
+                <cylinderGeometry args={[0.02, 0.02, 0.3]} />
             </mesh>
 
-            {/* Shark Fin */}
-            <mesh position={[0, 0.5, 1.5]} rotation={[Math.PI / 2, 0, 0]} material={carbonMaterial}>
-                <coneGeometry args={[0.35, 0.6, 3]} />
-            </mesh>
 
-            {/* Air Intake */}
-            <mesh position={[0, 0.45, 0.2]} material={carbonMaterial}>
-                <boxGeometry args={[0.4, 0.15, 0.3]} />
-            </mesh>
+            {/* --- Wings --- */}
 
-            {/* Front Wing - Main Plane */}
-            <mesh position={[0, 0.05, -1.6]} material={carbonMaterial}>
-                <boxGeometry args={[1.6, 0.02, 0.3]} />
-            </mesh>
+            {/* Front Wing Main */}
+            <group position={[0, 0.05, -2.1]}>
+                <mesh material={carbonMaterial}>
+                    <boxGeometry args={[1.8, 0.02, 0.3]} />
+                </mesh>
+                {/* Endplates */}
+                <mesh position={[-0.9, 0.1, 0]} material={carbonMaterial}>
+                    <boxGeometry args={[0.02, 0.2, 0.3]} />
+                </mesh>
+                <mesh position={[0.9, 0.1, 0]} material={carbonMaterial}>
+                    <boxGeometry args={[0.02, 0.2, 0.3]} />
+                </mesh>
+                {/* Flaps (Red Accent) */}
+                <mesh position={[0, 0.04, -0.05]} rotation={[-0.2, 0, 0]} material={redMaterial}>
+                    <boxGeometry args={[1.7, 0.01, 0.15]} />
+                </mesh>
+            </group>
 
-            {/* Front Wing - Blue Accent */}
-            <mesh position={[0, 0.08, -1.65]} material={wingMaterial}>
-                <boxGeometry args={[1.55, 0.015, 0.15]} />
-            </mesh>
 
-            {/* Front Wing - Upper Element */}
-            <mesh position={[0, 0.12, -1.55]} material={carbonMaterial}>
-                <boxGeometry args={[1.5, 0.015, 0.2]} />
-            </mesh>
-
-            {/* Rear Wing - Main Plane */}
-            <mesh position={[0, 0.6, 1.8]} material={carbonMaterial}>
-                <boxGeometry args={[1.4, 0.02, 0.4]} />
-            </mesh>
-
-            {/* Rear Wing - Upper Element */}
-            <mesh position={[0, 0.7, 1.8]} material={carbonMaterial}>
-                <boxGeometry args={[1.35, 0.015, 0.35]} />
-            </mesh>
-
-            {/* Rear Wing - Blue Accent */}
-            <mesh position={[0, 0.65, 1.85]} material={wingMaterial}>
-                <boxGeometry args={[1.38, 0.015, 0.1]} />
-            </mesh>
-
+            {/* Rear Wing */}
+            <group position={[0, 0.7, 1.9]}>
+                {/* Main Element */}
+                <mesh material={carbonMaterial}>
+                    <boxGeometry args={[1.0, 0.02, 0.4]} />
+                </mesh>
+                {/* DRS Flap (Yellow) */}
+                <mesh position={[0, 0.15, 0.05]} rotation={[0.2, 0, 0]} material={yellowMaterial}>
+                    <boxGeometry args={[1.0, 0.02, 0.2]} />
+                </mesh>
+                {/* Endplates */}
+                <mesh position={[-0.51, -0.2, 0]} material={bodyBlueMaterial}>
+                    <boxGeometry args={[0.02, 0.6, 0.5]} />
+                </mesh>
+                <mesh position={[0.51, -0.2, 0]} material={bodyBlueMaterial}>
+                    <boxGeometry args={[0.02, 0.6, 0.5]} />
+                </mesh>
+            </group>
             {/* Rear Wing Supports */}
-            <mesh position={[-0.6, 0.4, 1.8]} material={carbonMaterial}>
-                <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
-            </mesh>
-            <mesh position={[0.6, 0.4, 1.8]} material={carbonMaterial}>
-                <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
+            <mesh position={[0, 0.4, 1.7]} rotation={[-0.2, 0, 0]} material={carbonMaterial}>
+                <boxGeometry args={[0.05, 0.4, 0.2]} />
             </mesh>
 
-            {/* Sidepods - Left */}
-            <mesh position={[-0.5, 0.15, 0.5]} material={carbonMaterial}>
-                <boxGeometry args={[0.25, 0.2, 1.5]} />
+
+            {/* --- Floor --- */}
+            <mesh position={[0, 0.05, 0.2]} material={carbonMaterial}>
+                <boxGeometry args={[1.4, 0.02, 3.5]} />
             </mesh>
 
-            {/* Sidepods - Right */}
-            <mesh position={[0.5, 0.15, 0.5]} material={carbonMaterial}>
-                <boxGeometry args={[0.25, 0.2, 1.5]} />
+
+            {/* --- Wheels --- */}
+            {/* Front Left */}
+            <Wheel position={[-0.8, 0.33, -1.4]} rotation={[0, 0, 0]} rubber={rubberMaterial} metal={metallicMaterial} yellow={yellowMaterial} />
+            {/* Front Right */}
+            <Wheel position={[0.8, 0.33, -1.4]} rotation={[0, 0, 0]} rubber={rubberMaterial} metal={metallicMaterial} yellow={yellowMaterial} />
+            {/* Rear Left */}
+            <Wheel position={[-0.8, 0.33, 1.4]} rotation={[0, 0, 0]} widthScale={1.4} rubber={rubberMaterial} metal={metallicMaterial} yellow={yellowMaterial} />
+            {/* Rear Right */}
+            <Wheel position={[0.8, 0.33, 1.4]} rotation={[0, 0, 0]} widthScale={1.4} rubber={rubberMaterial} metal={metallicMaterial} yellow={yellowMaterial} />
+
+            {/* Rear Light */}
+            <mesh position={[0, 0.25, 2.0]} material={brakeLightMaterial}>
+                <boxGeometry args={[0.1, 0.1, 0.05]} />
             </mesh>
 
-            {/* Front Left Wheel */}
-            <group position={[-0.7, 0.15, -1.2]} rotation={[0, 0.1, 0]}>
-                {/* Rim */}
-                <mesh material={metallicMaterial}>
-                    <cylinderGeometry args={[0.2, 0.2, 0.15, 16]} />
-                </mesh>
-                {/* Tire */}
-                <mesh material={rubberMaterial}>
-                    <torusGeometry args={[0.2, 0.1, 16, 32]} />
-                </mesh>
-            </group>
+        </group>
+    );
+}
 
-            {/* Front Right Wheel */}
-            <group position={[0.7, 0.15, -1.2]} rotation={[0, 0.1, 0]}>
-                <mesh material={metallicMaterial}>
-                    <cylinderGeometry args={[0.2, 0.2, 0.15, 16]} />
-                </mesh>
-                <mesh material={rubberMaterial}>
-                    <torusGeometry args={[0.2, 0.1, 16, 32]} />
-                </mesh>
-            </group>
-
-            {/* Rear Left Wheel */}
-            <group position={[-0.7, 0.2, 1.3]}>
-                <mesh material={metallicMaterial}>
-                    <cylinderGeometry args={[0.25, 0.25, 0.2, 16]} />
-                </mesh>
-                <mesh material={rubberMaterial}>
-                    <torusGeometry args={[0.25, 0.12, 16, 32]} />
-                </mesh>
-            </group>
-
-            {/* Rear Right Wheel */}
-            <group position={[0.7, 0.2, 1.3]}>
-                <mesh material={metallicMaterial}>
-                    <cylinderGeometry args={[0.25, 0.25, 0.2, 16]} />
-                </mesh>
-                <mesh material={rubberMaterial}>
-                    <torusGeometry args={[0.25, 0.12, 16, 32]} />
-                </mesh>
-            </group>
-
-            {/* Nose Cone */}
-            <mesh position={[0, 0.1, -1.9]} rotation={[Math.PI / 2, 0, 0]} material={carbonMaterial}>
-                <coneGeometry args={[0.15, 0.4, 8]} />
+// Sub-component for Wheel to reduce repetition
+function Wheel({ position, rotation, widthScale = 1, rubber, metal, yellow }: any) {
+    return (
+        <group position={position} rotation={rotation}>
+            {/* Tire */}
+            <mesh rotation={[0, 0, Math.PI / 2]} material={rubber}>
+                <cylinderGeometry args={[0.33, 0.33, 0.35 * widthScale, 32]} />
+            </mesh>
+            {/* Rim */}
+            <mesh rotation={[0, 0, Math.PI / 2]} material={metal}>
+                <cylinderGeometry args={[0.2, 0.2, 0.36 * widthScale, 16]} />
+            </mesh>
+            {/* Rim Detail (Nut) */}
+            <mesh position={widthScale > 1 ? [-0.2, 0, 0] : [0.2, 0, 0]} rotation={[0, 0, Math.PI / 2]} material={yellow}>
+                <cylinderGeometry args={[0.05, 0.05, 0.1, 6]} />
             </mesh>
         </group>
     );

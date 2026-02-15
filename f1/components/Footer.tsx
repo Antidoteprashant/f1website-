@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function Footer() {
-    const [currentTime, setCurrentTime] = useState(new Date());
+    const [currentTime, setCurrentTime] = useState<Date | null>(null);
     const [isDesktop, setIsDesktop] = useState(true);
 
     useEffect(() => {
+        setCurrentTime(new Date());
         const checkDesktop = () => setIsDesktop(window.innerWidth >= 768);
         checkDesktop(); // Check initially
         window.addEventListener('resize', checkDesktop);
@@ -155,7 +156,7 @@ export default function Footer() {
                                         className="absolute top-1/2 left-1/2 w-1.5 bg-white rounded-full origin-bottom"
                                         style={{
                                             height: '25%',
-                                            transform: `translate(-50%, -100%) rotate(${(currentTime.getHours() % 12) * 30 + currentTime.getMinutes() * 0.5}deg)`,
+                                            transform: `translate(-50%, -100%) rotate(${currentTime ? (currentTime.getHours() % 12) * 30 + currentTime.getMinutes() * 0.5 : 0}deg)`,
                                         }}
                                     />
 
@@ -164,7 +165,7 @@ export default function Footer() {
                                         className="absolute top-1/2 left-1/2 w-1 bg-green-500 rounded-full origin-bottom"
                                         style={{
                                             height: '35%',
-                                            transform: `translate(-50%, -100%) rotate(${currentTime.getMinutes() * 6}deg)`,
+                                            transform: `translate(-50%, -100%) rotate(${currentTime ? currentTime.getMinutes() * 6 : 0}deg)`,
                                         }}
                                     />
 
@@ -173,7 +174,7 @@ export default function Footer() {
                                         className="absolute top-1/2 left-1/2 w-0.5 bg-red-500 rounded-full origin-bottom"
                                         style={{
                                             height: '40%',
-                                            transform: `translate(-50%, -100%) rotate(${currentTime.getSeconds() * 6}deg)`,
+                                            transform: `translate(-50%, -100%) rotate(${currentTime ? currentTime.getSeconds() * 6 : 0}deg)`,
                                         }}
                                     />
 
@@ -185,11 +186,11 @@ export default function Footer() {
                             {/* Digital Time Display */}
                             <div className="mt-6 text-center">
                                 <p className="font-[family-name:var(--font-orbitron)] text-2xl text-white/80">
-                                    {currentTime.toLocaleTimeString('en-US', {
+                                    {currentTime ? currentTime.toLocaleTimeString('en-US', {
                                         hour: '2-digit',
                                         minute: '2-digit',
                                         hour12: false
-                                    })}
+                                    }) : '00:00:00'}
                                 </p>
                             </div>
                         </motion.div>
