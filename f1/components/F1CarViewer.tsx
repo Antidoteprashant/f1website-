@@ -110,8 +110,9 @@ export default function F1CarViewer() {
                     />
 
                     {/* --- Post Processing --- */}
-                    <EffectComposer disableNormalPass>
+                    <EffectComposer enableNormalPass={false}>
                         {/* Bloom for glowing lights and highlights */}
+                        {/* @ts-ignore */}
                         <Bloom
                             luminanceThreshold={1}
                             mipmapBlur
@@ -119,8 +120,10 @@ export default function F1CarViewer() {
                             radius={0.6}
                         />
                         {/* Vignette to focus center */}
+                        {/* @ts-ignore */}
                         <Vignette eskil={false} offset={0.1} darkness={0.9} />
                         {/* Subtle Noise for realism */}
+                        {/* @ts-ignore */}
                         <Noise opacity={0.02} />
                     </EffectComposer>
 
